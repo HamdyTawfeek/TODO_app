@@ -9,5 +9,14 @@
             {% endfor %}
             
         </ul>
+        <form action="todos/create" method="post">
+            <div>
+                <label for="name">Add a toDOooo</label><br>
+                <input type="text" name="description"><br>
+            </div>
+            <div>
+                <input type="submit" value="Create">
+            </div>
+        </form>
     </body>
 </html>
