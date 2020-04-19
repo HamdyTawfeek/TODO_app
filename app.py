@@ -33,7 +33,7 @@ class Todo(db.Model):
 
 @app.route('/')
 def index():
-    data = Todo.query.all()
+    data = Todo.query.order_by('id').all()
     return render_template('index.html', data=data)
 
 
@@ -60,6 +60,37 @@ def create_todo():
         abort(500)
     else:
         return jsonify(body) 
+
+
+@app.route('/todos/<todo_id>/set-completed', methods=['POST'])
+def set_completed_todo(todo_id):
+    error = False
+    try:
+        completed = request.get_json()['completed']
+        todo_item = Todo.query.get(todo_id)
+        todo_item.completed = completed
+        db.session.commit()
+
+    except:
+        db.session.rollback()
+    finally:
+        db.session.close()
+    return redirect(url_for('index'))
+
+
+@app.route('/todos/<todo_id>/delete', methods=['POST'])
+def delete_todo_item(todo_id):
+    error = False
+    try:
+        todo_item = Todo.query.get(todo_id)
+        db.session.delete(todo_item)
+        db.session.commit()
+
+    except:
+        db.session.rollback()
+    finally:
+        db.session.close()
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
