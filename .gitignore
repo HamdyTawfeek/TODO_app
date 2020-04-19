@@ -1,0 +1,27 @@
+.vscode/
+__pycache__/
+
+### Notebooks ###
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+
+### Data ###
+/data
+*.csv
+*.dat
+*.efx
+*.gbr
+*.key
+*.pps
+*.ppt
+*.pptx
+*.sdf
+*.tax2010
+*.vcf
+*.xml
+*.xlsx
+*.xls
+
+
+__pycache__/
