@@ -78,7 +78,7 @@ def set_completed_todo(todo_id):
     return redirect(url_for('index'))
 
 
-@app.route('/todos/<todo_id>/delete', methods=['POST'])
+@app.route('/todos/<todo_id>', methods=['DELETE'])
 def delete_todo_item(todo_id):
     error = False
     try:
@@ -90,8 +90,7 @@ def delete_todo_item(todo_id):
         db.session.rollback()
     finally:
         db.session.close()
-    return redirect(url_for('index'))
-
+    return jsonify({ 'success': True })
 
 if __name__ == '__main__':
     app.run(debug=True)
